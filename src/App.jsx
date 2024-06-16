@@ -1,8 +1,9 @@
+import LoginForm from "./forms/LoginForm";
 
 export default function App() {
   return (
-    <div>
-      <p>This is all about react form</p>
+    <div className="flex h-[100vh] justify-center items-center">
+    <LoginForm/>
     </div>
   )
 }
