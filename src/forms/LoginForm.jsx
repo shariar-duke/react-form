@@ -1,12 +1,25 @@
 import Feild from "../components/Feild";
 import FeildSet from "../components/FeildSet";
+import {useForm} from "react-hook-form"
+
 export default function LoginForm() {
+   const {
+    register , 
+    handleSubmit,
+    formState:{errors}
+   } = useForm()
+
+   const submitForm = (formData) => 
+   {
+    console.log(formData)
+   }
   return (
     <>
-      <form action="" className="shadow-lg p-8 bg-gray-200 rounded-md">
+      <form onSubmit={handleSubmit(submitForm)} className="shadow-lg p-8 bg-gray-200 rounded-md">
         <FeildSet label="Login">
-          <Feild label="Email">
+          <Feild label="Email" error={errors.email}>
             <input
+              {...register("email" , {required:"Email is required"})}
               className="p-2 border box-border border-gray-200 w-[300px] rounded-md"
               type="email"
               name="email"
@@ -15,8 +28,12 @@ export default function LoginForm() {
             />
           </Feild>
 
-          <Feild label="Password">
+          <Feild label="Password" error={errors.password}>
             <input
+              {...register("password", {required:"Password is required", minLength:{
+                value:8,
+                message: "Your Password must be at least 8 Chcaracter"
+              }})}
               className="p-2 border box-border border-gray-200 w-[300px] rounded-md"
               type="password"
               name="password"
